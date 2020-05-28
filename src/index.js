@@ -1,9 +1,23 @@
-const http = require("http");
-const url = require("url");
-const querystring = require("querystring");
+const express = require("express");
 const { info, error } = require("./modules/my-log");
 const { countries } = require("countries-list");
 
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
+app.get("/info", (req, res) => {
+  let result = info("Hola Info Nodemon");
+  res.send(result);
+});
+
+app.get("*", (req, res) => {
+  res.status(404).send("Not found!");
+});
+
+/*
 const server = http.createServer((request, response) => {
   const parsed = url.parse(request.url);
   const pathname = parsed.pathname;
@@ -37,7 +51,6 @@ const server = http.createServer((request, response) => {
     response.end();
   }
 });
+*/
 
-server.listen(4000);
-
-console.log("Running on 4000");
+app.listen(4000, () => console.log("Running on 4000"));
