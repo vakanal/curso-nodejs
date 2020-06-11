@@ -1,6 +1,5 @@
 {
   "env": {
-    "commonjs": true,
     "es6": true,
     "node": true
   },
@@ -9,9 +8,12 @@
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
   },
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 11
+    "ecmaVersion": 2018,
+    "sourceType": "module"
   },
+  "plugins": ["@typescript-eslint"],
   "rules": {
     "arrow-parens": "off",
     "no-console": "off",
