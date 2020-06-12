@@ -3,7 +3,14 @@
     "es6": true,
     "node": true
   },
-  "extends": ["airbnb-base"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".ts"]
+      }
+    }
+  },
+  "extends": ["airbnb-base", "plugin:@typescript-eslint/recommended"],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
@@ -20,6 +27,13 @@
     "comma-dangle": "off",
     "spaced-comment": "off",
     "object-curly-newline": "off",
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off",
+    "implicit-arrow-linebreak": "off",
+    "import/extensions": "off",
+    "no-throw-literal": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-inferrable-types": "off",
+    "@typescript-eslint/no-namespace": "off",
+    "@typescript-eslint/no-explicit-any": "off"
   }
 }

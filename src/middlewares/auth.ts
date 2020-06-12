@@ -1,7 +1,7 @@
-/* eslint-disable no-throw-literal */
-const jwt = require('jsonwebtoken');
+import { Request, Response, NextFunction } from 'express';
+import jwt from 'jsonwebtoken';
 
-const isValidHostname = (req, res, next) => {
+export const isValidHostname = (req: Request, res: Response, next: NextFunction): void => {
   const validHosts = ['dina.ec', 'localhost'];
   if (validHosts.includes(req.hostname)) {
     next();
@@ -10,12 +10,12 @@ const isValidHostname = (req, res, next) => {
   }
 };
 
-const isAuth = (req, res, next) => {
+export const isAuth = (req: Request, res: Response, next: NextFunction): void => {
   try {
     const { token } = req.headers;
     if (token) {
-      const { userId, role } = jwt.verify(token, process.env.JWT_SECRET);
-      req.sessionData = { userId, role };
+      const data: any = jwt.verify(token as string, process.env.JWT_SECRET!);
+      req.sessionData = { userId: data.userId, role: data.role };
       next();
     } else {
       throw {
@@ -31,7 +31,7 @@ const isAuth = (req, res, next) => {
   }
 };
 
-const isAdmin = (req, res, next) => {
+export const isAdmin = (req: Request, res: Response, next: NextFunction): void => {
   try {
     const { role } = req.sessionData;
     if (role !== 'admin') {
@@ -48,5 +48,3 @@ const isAdmin = (req, res, next) => {
       .send({ status: error.status || 'ERROR', message: error.message });
   }
 };
-
-module.exports = { isValidHostname, isAuth, isAdmin };

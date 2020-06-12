@@ -1,11 +1,12 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const UserModel = require('../../mongo/models/users-model');
-const ProductModel = require('../../mongo/models/products-model');
+import { Request, Response } from 'express';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import UserModel from '../../mongo/models/users-model';
+import ProductModel from '../../mongo/models/products-model';
 
-const expiresIn = 3600;
+const expiresIn: string | number = process.env.TIMEOUT || 600;
 
-const login = async (req, res) => {
+const login = async (req: Request, res: Response): Promise<void> => {
   try {
     const { email, password } = req.body;
     const user = await UserModel.findOne({ email });
@@ -14,7 +15,7 @@ const login = async (req, res) => {
       if (isOk) {
         const token = jwt.sign(
           { userId: user._id, role: user.role },
-          process.env.JWT_SECRET,
+          process.env.JWT_SECRET!,
           { expiresIn }
         );
         res.send({ status: 'OK', data: { token, expiresIn } });
@@ -29,15 +30,16 @@ const login = async (req, res) => {
   }
 };
 
-const createUser = async (req, res) => {
-  const { username, email, password, data } = req.body;
+const createUser = async (req: Request, res: Response): Promise<void> => {
   try {
+    const { username, email, password, data, role } = req.body;
     const hash = await bcrypt.hash(password, 15);
     await UserModel.create({
       username,
       email,
       data,
       password: hash,
+      role
     });
     res.send({ status: 'OK', message: 'User Created' });
   } catch (error) {
@@ -51,7 +53,7 @@ const createUser = async (req, res) => {
   }
 };
 
-const updateUser = async (req, res) => {
+const updateUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const { userId } = req.sessionData;
     const { username, email, data } = req.body;
@@ -72,7 +74,7 @@ const updateUser = async (req, res) => {
   }
 };
 
-const deleteUser = async (req, res) => {
+const deleteUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const { userId } = req.body;
     if (!userId) {
@@ -86,7 +88,7 @@ const deleteUser = async (req, res) => {
   }
 };
 
-const getUsers = async (req, res) => {
+const getUsers = async (req: Request, res: Response): Promise<void> => {
   try {
     const users = await UserModel.find().select({
       password: 0,
@@ -99,10 +101,4 @@ const getUsers = async (req, res) => {
   }
 };
 
-module.exports = {
-  createUser,
-  deleteUser,
-  getUsers,
-  updateUser,
-  login,
-};
+export default { login, createUser, updateUser, deleteUser, getUsers };

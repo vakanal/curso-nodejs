@@ -1,9 +1,9 @@
-const ProductModel = require('../../mongo/models/products-model');
+import { Request, Response } from 'express';
+import ProductModel from '../../mongo/models/products-model';
 
-const createProduct = async (req, res) => {
-  const { title, desc, price, images, userId } = req.body;
-
+const createProduct = async (req: Request, res: Response): Promise<void> => {
   try {
+    const { title, desc, price, images, userId } = req.body;
     const product = await ProductModel.create({
       title,
       desc,
@@ -18,7 +18,7 @@ const createProduct = async (req, res) => {
   }
 };
 
-const getProducts = async (req, res) => {
+const getProducts = async (req: Request, res: Response): Promise<void> => {
   try {
     const products = await ProductModel.find({
       price: { $lt: 10 }
@@ -32,13 +32,13 @@ const getProducts = async (req, res) => {
   }
 };
 
-const getProductsByUser = async (req, res) => {
+const getProductsByUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const products = await ProductModel.find({
       user: req.params.userId,
     });
-      //.select('title desc price')
-      //.populate('user', 'username email data role');
+    //.select('title desc price')
+    //.populate('user', 'username email data role');
     res.send({ status: 'OK', data: products });
   } catch (error) {
     console.error(error);
@@ -46,8 +46,4 @@ const getProductsByUser = async (req, res) => {
   }
 };
 
-module.exports = {
-  createProduct,
-  getProducts,
-  getProductsByUser,
-};
+export default { createProduct, getProducts, getProductsByUser };

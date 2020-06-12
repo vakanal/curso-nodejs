@@ -1,8 +1,8 @@
-const express = require('express');
-const usersController = require('../../controllers/v1/users-controller');
-const { isAuth, isValidHostname, isAdmin } = require('../../middlewares/auth');
+import express, { Router } from 'express';
+import { isAuth, isValidHostname, isAdmin } from '../../middlewares/auth';
+import usersController from '../../controllers/v1/users-controller';
 
-const router = express.Router();
+const router: Router = express.Router();
 
 router.post('/login', usersController.login);
 router.post('/create', usersController.createUser);
@@ -28,4 +28,4 @@ router.get(
   usersController.getUsers
 );
 
-module.exports = router;
+export default router;
