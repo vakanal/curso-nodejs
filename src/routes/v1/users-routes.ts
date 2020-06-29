@@ -4,6 +4,8 @@ import usersController from '../../controllers/v1/users-controller';
 
 const router: Router = express.Router();
 
+router.get('/', usersController.getHome);
+
 router.post('/login', usersController.login);
 router.post('/create', usersController.createUser);
 router.post(

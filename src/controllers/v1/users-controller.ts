@@ -101,4 +101,8 @@ const getUsers = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export default { login, createUser, updateUser, deleteUser, getUsers };
+const getHome = (req: Request, res: Response): void => {
+  res.send('<h1>Hello World!</h1>');
+};
+
+export default { login, createUser, updateUser, deleteUser, getUsers, getHome };
