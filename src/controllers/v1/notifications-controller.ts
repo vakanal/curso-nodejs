@@ -29,7 +29,7 @@ const sendNotifications = (req: Request, res: Response): void => {
         .send({ status: 'OK', message: 'Successfully sent message' });
     })
     .catch((err) => {
-      console.error('Error sending message:', err);
+      console.log('Error sending message:', err);
       res.status(500).send({ status: 'ERROR', message: err.message });
     });
 };
