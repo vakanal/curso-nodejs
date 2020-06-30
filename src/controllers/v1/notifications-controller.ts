@@ -17,6 +17,8 @@ const sendNotifications = (req: Request, res: Response): void => {
     token: devicesIds[req.body.device],
   };
 
+  console.log('NOTIFICATION', singleNotification);
+
   admin
     .messaging()
     .send(singleNotification)
