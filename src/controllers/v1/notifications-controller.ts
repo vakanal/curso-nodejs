@@ -4,7 +4,7 @@ import admin from '../../config';
 const sendNotifications = (req: Request, res: Response): void => {
   const devicesIds: any = {
     android:
-      'fpzdt4g2RyO1mTbh00-Ek_:APA91bFDBsKVodGmIhOq1ZRDAKsdlWraZ_3Dmn59CEIFc1ijPErvJ9hiqOi231uqQV9CsH5fr_PFz3pRtLvmHJSGuhPsvNlSS6wfKnDOfXbu3qTH_Z3RH1N4RFen3nPb7NNYZBsa-mg-',
+      'f31UGTx5mtw:APA91bE95Fr7RH42fdByJQfUuY3KzHntmVlFNYed4j-iuuSkZuCMysTeFcC5aFKckc6ST4kHtolhftjWDFU6iKMEO8quRhKCtM0k5glbptGBMA4yKN529SSJRFO3Q_Je634cBN9d79pl',
     ios:
       'cTj534SeakB6pejSdJGchF:APA91bFzJaNH6R4Er5FSC6lKB-OOqcJvIfa7QFE1XeNdUIeXivw0f8R8jSbHH2tX8KcWT7kgA4HIOP26p81-bY_rHDYko_HS_5LG_HnkyTscQewgvGBLOfnz9DdDejQHdPc0bY9WEFiH',
   };
