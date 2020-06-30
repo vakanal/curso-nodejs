@@ -9,6 +9,10 @@ const sendNotifications = (req: Request, res: Response): void => {
       'cTj534SeakB6pejSdJGchF:APA91bFzJaNH6R4Er5FSC6lKB-OOqcJvIfa7QFE1XeNdUIeXivw0f8R8jSbHH2tX8KcWT7kgA4HIOP26p81-bY_rHDYko_HS_5LG_HnkyTscQewgvGBLOfnz9DdDejQHdPc0bY9WEFiH',
   };
 
+  console.log(req);
+
+  console.log(req.body);
+
   const singleNotification = {
     notification: {
       title: req.body.title,
